@@ -5,7 +5,7 @@ dotenv.config();
 import cors from "cors";
 
 const port = process.env.PORT || 8080;
-const clientDevUrl = process.env.CLIENT_DEV_URL || '';
+const clientDevUrl = process.env.CLIENT_DEV_URL || "";
 
 // middleware
 app.use(express.json());
