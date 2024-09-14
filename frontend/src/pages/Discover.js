@@ -21,7 +21,6 @@ const Discover = () => {
         {industries.map((industry, index) => (
           <div key={index} className="industry-card">
             <h2>{industry}</h2>
-            <p>Find people working in {industry} industry</p>
           </div>
         ))}
       </div>
