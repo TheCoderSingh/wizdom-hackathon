@@ -3,9 +3,38 @@ import "../css/find.scss";
 import TinderCard from "react-tinder-card";
 import Erlich from "../assets/erlich.jpg";
 import Richard from "../assets/richard.jpg";
-import { createRef, useMemo, useRef, useState } from "react";
+import { createRef, useEffect, useMemo, useRef, useState } from "react";
+
+import { config } from "../config";
+const endpoint = config.url;
 
 const Find = () => {
+  const [users, setUsers] = useState([]);
+
+  const getUsers = async () => {
+    try {
+      const response = await fetch(endpoint + "/api/v1/users/fetch-users", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setUsers(data.users);
+      } else {
+        const data = await response.json();
+        console.error("Fetching users failed:", data);
+      }
+    } catch (error) {
+      console.error("Error during fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   const db = [
     {
       name: "Richard Hendricks",
@@ -17,17 +46,17 @@ const Find = () => {
     },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(db.length - 1);
+  const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   const [lastDirection, setLastDirection] = useState();
 
   const currentIndexRef = useRef(currentIndex);
 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(users.length)
         .fill(0)
         .map((i) => createRef()),
-    [db.length]
+    [users.length]
   );
 
   const updateCurrentIndex = (val) => {
@@ -42,10 +71,10 @@ const Find = () => {
 
   const canSwipe = currentIndex >= 0;
 
-  const canGoBack = currentIndex < db.length - 1;
+  const canGoBack = currentIndex < users.length - 1;
 
   const swipe = async (dir) => {
-    if (canSwipe && currentIndex < db.length) {
+    if (canSwipe && currentIndex < users.length) {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
     }
   };
@@ -62,7 +91,7 @@ const Find = () => {
   return (
     <div style={{ marginLeft: "-8px", marginRight: "-8px" }}>
       <div className="cardContainer">
-        {db.map((character, index) => (
+        {users.map((character, index) => (
           <TinderCard
             key={character.name}
             ref={childRefs[index]}
