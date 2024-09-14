@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
-import User from "../models/User";
+import User from "../models/User.js";
 
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;

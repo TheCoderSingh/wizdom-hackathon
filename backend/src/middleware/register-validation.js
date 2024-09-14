@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 // zod Validations
 const registerSchema = z.object({
   name: z.string().min(3),
