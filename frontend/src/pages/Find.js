@@ -60,8 +60,7 @@ const Find = () => {
   };
 
   return (
-    <div>
-      <h1>Discover</h1>
+    <div style={{ marginLeft: "-8px", marginRight: "-8px" }}>
       <div className="cardContainer">
         {db.map((character, index) => (
           <TinderCard
@@ -74,9 +73,8 @@ const Find = () => {
             <div
               style={{ backgroundImage: "url(" + character.url + ")" }}
               className="card"
-            >
-              <h3>{character.name}</h3>
-            </div>
+            />
+            <h3>{character.name}</h3>
             <div className="buttons">
               <button
                 style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
@@ -84,9 +82,9 @@ const Find = () => {
               >
                 Swipe left!
               </button>
-              <button style={{ backgroundColor: !canGoBack && "#c3c4d3" }}>
+              {/* <button style={{ backgroundColor: !canGoBack && "#c3c4d3" }}>
                 Undo swipe!
-              </button>
+              </button> */}
               <button
                 style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
                 onClick={() => swipe("right")}
@@ -99,7 +97,11 @@ const Find = () => {
                 You swiped {lastDirection}
               </h2>
             ) : (
-              <h2 className="infoText">Swipe a card or press a button!</h2>
+              <div className="infoText">
+                <p>Looking for mentees</p>
+                <p>Looking to get better at html, css</p>
+                <p>Skills: HTML, CSS, Adobe Photoshop</p>
+              </div>
             )}
           </TinderCard>
         ))}
