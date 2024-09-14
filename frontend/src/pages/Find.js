@@ -100,7 +100,7 @@ const Find = () => {
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
             <div
-              style={{ backgroundImage: "url(" + character.url + ")" }}
+              style={{ backgroundImage: "url(" + character.image + ")" }}
               className="card"
             />
             <h3>{character.name}</h3>
