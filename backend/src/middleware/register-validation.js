@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+import User from "../models/User.js";
+import { messages } from "../messages/lang/en/user.js";
+
 // zod Validations
 const registerSchema = z.object({
   name: z.string().min(3),

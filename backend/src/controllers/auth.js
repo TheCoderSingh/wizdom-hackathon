@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
+import { messages } from "../messages/lang/en/user.js";
 import User from "../models/User.js";
 
 export const registerUser = async (req, res) => {
