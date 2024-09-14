@@ -1,3 +1,5 @@
+import React from "react";
+
 const Discover = () => {
   const industries = [
     "Software Development and IT Services",
