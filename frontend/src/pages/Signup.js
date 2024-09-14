@@ -36,7 +36,7 @@ export default function Signup() {
 
       if (response.ok) {
         setLoading(false);
-        navigate("/login");
+        navigate("/onboarding");
       } else {
         const data = await response.json();
         console.error("Signup failed:", data);
