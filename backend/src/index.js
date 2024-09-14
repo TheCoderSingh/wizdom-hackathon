@@ -1,13 +1,19 @@
+import { connectDB } from "./db/connect.js";
+import authRoute from "./routes/auth.js";
+
 import express from "express";
-const app = express();
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 dotenv.config();
-import cors from "cors";
+
+const app = express();
 
 const port = process.env.PORT || 8080;
 const clientDevUrl = process.env.CLIENT_DEV_URL || "";
 
 // middleware
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
@@ -24,9 +30,13 @@ app.use(
   })
 );
 
+// Routes
+app.use("/api/v1/user", authRoute);
+
 const start = async () => {
   try {
     console.info("Server running on", process.env.NODE_ENV);
+    await connectDB(process.env.MONGO_URI);
     app.listen(port, () => console.log(`Server listening on port ${port}...`));
   } catch (err) {
     console.error(err);
