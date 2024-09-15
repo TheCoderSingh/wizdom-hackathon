@@ -9,6 +9,7 @@ export default function UserReducer(state = initialState, action) {
     case SET_USER:
       return {
         ...state,
+        name: action.payload.name,
         isLoggedIn: action.payload.isLoggedIn,
       };
     case CLEAR_SESSION:
