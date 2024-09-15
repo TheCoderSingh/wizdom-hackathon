@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { config } from "../config";
-import messages from "../messages/lang/en/user.json";
 import { setUser } from "../redux/actions/UserAction";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
+import "../css/auth.scss";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -17,7 +17,6 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
     if (isLoggedIn) navigate("/");
@@ -26,10 +25,8 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setErrMsg("");
 
     if (!email || !password) {
-      setErrMsg(messages.emptyFieldError);
       setLoading(false);
       return;
     }
@@ -47,15 +44,13 @@ export default function Login() {
           setUser(true)
         );
         setLoading(false);
-        navigate("/");
+        navigate("/find");
       } else {
         const data = await response.json();
         console.error("Login failed:", data);
-        setErrMsg(data.message || messages.serverError);
       }
     } catch (error) {
       console.error("Error during login:", error);
-      setErrMsg(messages.serverError);
     } finally {
       setLoading(false);
     }
@@ -63,7 +58,7 @@ export default function Login() {
 
   return (
     <Layout title="Login">
-      <div>
+      <div className="auth-container">
         <h1>Login</h1>
         <form onSubmit={handleLogin}>
           <div className="form-group">
@@ -75,7 +70,6 @@ export default function Login() {
               placeholder="example@email.com"
               onChange={(e) => {
                 setEmail(e.target.value);
-                setErrMsg("");
               }}
             />
           </div>
@@ -87,13 +81,9 @@ export default function Login() {
               name="password"
               onChange={(e) => {
                 setPassword(e.target.value);
-                setErrMsg("");
               }}
             />
           </div>
-          <Link to="/forgot-password" className="linkAlt">
-            Forgot password?
-          </Link>
           <Button
             type="submit"
             title="Login"
