@@ -1,7 +1,8 @@
 import React from "react";
 import Card from "../components/Card";
 import "../css/discover.scss";
-
+import Logo from "../assets/wLogo.svg";
+import Bell from "../assets/bell.png";
 const Discover = () => {
   const industries = [
     "Software Development and IT Services",
@@ -18,6 +19,10 @@ const Discover = () => {
 
   return (
     <div className="discover-page">
+      <div className="discover-header">
+        <img id="logo" src={Logo} alt="Wizdom Logo"></img>
+        <img id="bell" src={Bell} alt="Bell Icon"></img>
+      </div>
       <h1>Discover People</h1>
       <div className="industries-list">
         {industries.map((industry, index) => (

@@ -3,34 +3,31 @@
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  border: 20px;
-  padding: 20px;
+  border: 20vw;
+  padding: 2vw;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.industry-list {
+.industries-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  gap: 20px;
+  padding: 2vw 30vw;
 }
 
-// .industry-card {
-//   flex: 0 1 calc(50% - 20px);
-//   padding: 20px;
-//   border: 1px solid #ccc;
-//   border-radius: 8px;
-//   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
-//   transition: transform 0.2s;
-//   margin-bottom: 20px;
-// }
+.discover-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 85vw;
+}
+#logo {
+  width: 5vw;
+}
 
-// .industry-card:hover {
-//   transform: scale(1.05);
-// }
-
-// .industry-card h2 {
-//   font-size: 1.5rem;
-//   color: #333;
-// }
+#bell {
+  align-self: flex-end;
+  width: 5vw;
+}
