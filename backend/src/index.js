@@ -1,5 +1,6 @@
 import { connectDB } from "./db/connect.js";
 import authRoute from "./routes/auth.js";
+import userRoute from "./routes/user.js";
 
 import express from "express";
 import cors from "cors";
@@ -32,6 +33,7 @@ app.use(
 
 // Routes
 app.use("/api/v1/user", authRoute);
+app.use("/api/v1/users", userRoute);
 
 const start = async () => {
   try {
