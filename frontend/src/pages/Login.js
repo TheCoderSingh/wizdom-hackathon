@@ -7,6 +7,7 @@ import messages from "../messages/lang/en/user.json";
 import { setUser } from "../redux/actions/UserAction";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
+import "../css/auth.scss";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function Login() {
           setUser(true)
         );
         setLoading(false);
-        navigate("/");
+        navigate("/find");
       } else {
         const data = await response.json();
         console.error("Login failed:", data);
@@ -63,7 +64,7 @@ export default function Login() {
 
   return (
     <Layout title="Login">
-      <div>
+      <div className="auth-container">
         <h1>Login</h1>
         <form onSubmit={handleLogin}>
           <div className="form-group">
@@ -91,9 +92,6 @@ export default function Login() {
               }}
             />
           </div>
-          <Link to="/forgot-password" className="linkAlt">
-            Forgot password?
-          </Link>
           <Button
             type="submit"
             title="Login"

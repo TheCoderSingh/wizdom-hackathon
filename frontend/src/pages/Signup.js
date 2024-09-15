@@ -5,6 +5,7 @@ import { config } from "../config";
 import messages from "../messages/lang/en/user.json";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
+import "../css/auth.scss";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -52,8 +53,8 @@ export default function Signup() {
 
   return (
     <Layout title="Signup">
-      <div>
-        <h1>Signup</h1>
+      <div className="auth-container">
+        <h1>Sign Up</h1>
         <form onSubmit={handleSignup}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
