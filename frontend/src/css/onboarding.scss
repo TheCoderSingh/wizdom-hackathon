@@ -1,0 +1,124 @@
+.onboarding-container {
+  max-width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+    .mini-logo {
+      margin-bottom: 0;
+    }
+  }
+  
+  h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  label {
+    margin-bottom: 12px;
+  }
+
+  .progress-tracker {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #E0E0E0;
+
+      &.active {
+        background-color: #4285F4;
+      }
+    }
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+  
+    .skill-box {
+      padding: 10px;
+      background-color: #FFFFFF;
+      border: 1px solid #E0E0E0;
+      border-radius: 4px;
+      font-size: 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+  
+      &.selected {
+        background-color: var(--primaryColor);
+        color: #FFFFFF;
+        border-color: var(--primaryColor);
+      }
+  
+      &:hover {
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+    }
+  }
+
+  form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    select,
+    textarea {
+      margin-bottom: 15px;
+      padding: 12px;
+      border: 1px solid #E0E0E0;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    .gender-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 15px;
+
+      button {
+        padding: 12px;
+        background-color: #FFFFFF;
+        border: 1px solid #E0E0E0;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+
+        &.selected {
+          background-color: var(--primaryColor);
+          color: #FFFFFF;
+          border-color: var(--primaryColor);
+        }
+      }
+    }
+
+    .button-controls {
+      margin-top: auto;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .onboarding-container {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}

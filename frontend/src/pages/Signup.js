@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { config } from "../config";
@@ -9,11 +10,16 @@ import "../css/auth.scss";
 export default function Signup() {
   const navigate = useNavigate();
 
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const endpoint = config.url;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/onboarding");
+  }, [isLoggedIn, navigate]);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -33,7 +39,7 @@ export default function Signup() {
 
       if (response.ok) {
         setLoading(false);
-        navigate("/onboarding");
+        navigate("/login");
       } else {
         const data = await response.json();
         console.error("Signup failed:", data);

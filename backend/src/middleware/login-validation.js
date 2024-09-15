@@ -2,6 +2,7 @@ import { z } from "zod";
 import bcrypt from 'bcryptjs'
 
 import User from '../models/User.js';
+import { messages } from "../messages/lang/en/user.js"; x
 
 // zod Validations
 const loginSchema = z.object({

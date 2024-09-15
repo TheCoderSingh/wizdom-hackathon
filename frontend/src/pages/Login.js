@@ -19,7 +19,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isLoggedIn) navigate("/");
+    if (isLoggedIn) navigate("/onboarding");
   }, [isLoggedIn, navigate]);
 
   const handleLogin = async (e) => {
