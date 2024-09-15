@@ -1,0 +1,89 @@
+:root {
+  --primaryColor: #537af2;
+  --secondaryColor: yellow;
+  --errorColor: #ff0033;
+  --successColor: #00cc66;
+  --infoColor: #0066ff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  font-family: "Inter", sans-serif;
+  outline: none;
+}
+
+.btnPrimary {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 12px;
+  color: white;
+  background-color: var(--primaryColor);
+  border: solid 2px var(--primaryColor);
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-transition: all ease-in-out 0.3s;
+  -moz-transition: all ease-in-out 0.3s;
+  -ms-transition: all ease-in-out 0.3s;
+  -o-transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.3s;
+}
+
+.btnPrimary.full {
+  width: 100%;
+}
+
+.btnPrimary.disabled {
+  background-color: #d9d9d9;
+  border: solid 2px #d9d9d9;
+  cursor: not-allowed;
+}
+
+.btnPrimary:hover {
+  opacity: 0.8;
+}
+
+.buttonSpinner {
+  -ms-animation: btnSpinner 1s infinite linear;
+  -moz-animation: btnSpinner 1s infinite linear;
+  -webkit-animation: btnSpinner 1s infinite linear;
+  -o-animation: btnSpinner 1s infinite linear;
+  animation: btnSpinner 1s infinite linear;
+}
+
+@keyframes btnSpinner {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
