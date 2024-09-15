@@ -2,14 +2,13 @@ import "../css/find.scss";
 import Layout from "../components/Layout";
 
 import TinderCard from "react-tinder-card";
-// import Erlich from "../assets/erlich.jpg";
-// import Richard from "../assets/richard.jpg";
 import { createRef, useEffect, useMemo, useRef, useState } from "react";
 
 import { config } from "../config";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { clearSession } from "../redux/actions/UserAction";
+import Footer from "../components/Footer";
 
 const endpoint = config.url;
 
@@ -44,17 +43,6 @@ const Find = () => {
 
     getUsers();
   }, [isLoggedIn, navigate]);
-
-  // const db = [
-  //   {
-  //     name: "Richard Hendricks",
-  //     url: Richard,
-  //   },
-  //   {
-  //     name: "Erlich Bachman",
-  //     url: Erlich,
-  //   },
-  // ];
 
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   const [lastDirection, setLastDirection] = useState();
@@ -100,7 +88,7 @@ const Find = () => {
 
   return (
     <Layout title="Find">
-      <Link onClick={async () => dispatch(clearSession())}> Logout </Link>
+      {/* <Link onClick={async () => dispatch(clearSession())}> Logout </Link> */}
       <div style={{ marginLeft: "-8px", marginRight: "-8px" }}>
         <div className="cardContainer">
           {users.map((character, index) => (
@@ -115,7 +103,6 @@ const Find = () => {
                 style={{ backgroundImage: "url(" + character.image + ")" }}
                 className="card"
               />
-              <h3>{character.name}</h3>
               <div className="buttons">
                 <button
                   style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
@@ -139,15 +126,16 @@ const Find = () => {
                 </h2>
               ) : (
                 <div className="infoText">
-                  <p>Looking for mentees</p>
+                  <h3>{character.name}</h3>
+                  <p>Project Manager</p>
                   <p>Looking to get better at html, css</p>
-                  <p>Skills: HTML, CSS, Adobe Photoshop</p>
                 </div>
               )}
             </TinderCard>
           ))}
         </div>
       </div>
+      <Footer />
     </Layout>
   );
 };
