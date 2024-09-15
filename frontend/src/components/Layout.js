@@ -12,9 +12,7 @@ export default function Layout({ title, isLandingPage = false, children }) {
     <>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>
-          {isLandingPage ? "Wizdom" : `${title} | Wizdom`}
-        </title>
+        <title>{isLandingPage ? "Wizdom" : `${title} | Wizdom`}</title>
       </Helmet>
 
       {showNavFoot ? <div id="wrapper">{children}</div> : children}

@@ -1,28 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { config } from "../config";
-import messages from "../messages/lang/en/user.json";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
+import "../css/auth.scss";
 
 export default function Signup() {
   const navigate = useNavigate();
 
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const endpoint = config.url;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
+
+  useEffect(() => {
+    if (isLoggedIn) navigate("/onboarding");
+  }, [isLoggedIn, navigate]);
 
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setErrMsg("");
 
     if (!name || !email || !password) {
-      setErrMsg(messages.emptyFieldError);
       setLoading(false);
       return;
     }
@@ -36,15 +39,13 @@ export default function Signup() {
 
       if (response.ok) {
         setLoading(false);
-        navigate("/onboarding");
+        navigate("/login");
       } else {
         const data = await response.json();
         console.error("Signup failed:", data);
-        setErrMsg(messages.serverError);
       }
     } catch (error) {
       console.error("Error during signup:", error);
-      setErrMsg(messages.serverError);
     } finally {
       setLoading(false);
     }
@@ -52,8 +53,8 @@ export default function Signup() {
 
   return (
     <Layout title="Signup">
-      <div>
-        <h1>Signup</h1>
+      <div className="auth-container">
+        <h1>Sign Up</h1>
         <form onSubmit={handleSignup}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
@@ -64,7 +65,6 @@ export default function Signup() {
               placeholder="John Doe"
               onChange={(e) => {
                 setName(e.target.value);
-                setErrMsg("");
               }}
             />
           </div>
@@ -77,7 +77,6 @@ export default function Signup() {
               placeholder="example@email.com"
               onChange={(e) => {
                 setEmail(e.target.value);
-                setErrMsg("");
               }}
             />
           </div>
@@ -89,7 +88,6 @@ export default function Signup() {
               name="password"
               onChange={(e) => {
                 setPassword(e.target.value);
-                setErrMsg("");
               }}
             />
           </div>
