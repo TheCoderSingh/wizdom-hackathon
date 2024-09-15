@@ -1,4 +1,6 @@
 import React from "react";
+import Card from "../components/Card";
+import "../css/discover.scss";
 
 const Discover = () => {
   const industries = [
@@ -19,9 +21,7 @@ const Discover = () => {
       <h1>Discover People</h1>
       <div className="industries-list">
         {industries.map((industry, index) => (
-          <div key={index} className="industry-card">
-            <h2>{industry}</h2>
-          </div>
+          <Card key={index} industry={industry} />
         ))}
       </div>
     </div>
