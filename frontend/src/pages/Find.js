@@ -1,15 +1,23 @@
 import "../css/find.scss";
+import Layout from "../components/Layout";
 
 import TinderCard from "react-tinder-card";
-import Erlich from "../assets/erlich.jpg";
-import Richard from "../assets/richard.jpg";
+// import Erlich from "../assets/erlich.jpg";
+// import Richard from "../assets/richard.jpg";
 import { createRef, useEffect, useMemo, useRef, useState } from "react";
 
 import { config } from "../config";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { clearSession } from "../redux/actions/UserAction";
+
 const endpoint = config.url;
 
 const Find = () => {
+  const dispatch = useDispatch();
   const [users, setUsers] = useState([]);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const navigate = useNavigate();
 
   const getUsers = async () => {
     try {
@@ -32,19 +40,21 @@ const Find = () => {
   };
 
   useEffect(() => {
-    getUsers();
-  }, []);
+    if (!isLoggedIn) navigate("/login");
 
-  const db = [
-    {
-      name: "Richard Hendricks",
-      url: Richard,
-    },
-    {
-      name: "Erlich Bachman",
-      url: Erlich,
-    },
-  ];
+    getUsers();
+  }, [isLoggedIn, navigate]);
+
+  // const db = [
+  //   {
+  //     name: "Richard Hendricks",
+  //     url: Richard,
+  //   },
+  //   {
+  //     name: "Erlich Bachman",
+  //     url: Erlich,
+  //   },
+  // ];
 
   const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   const [lastDirection, setLastDirection] = useState();
@@ -89,53 +99,56 @@ const Find = () => {
   };
 
   return (
-    <div style={{ marginLeft: "-8px", marginRight: "-8px" }}>
-      <div className="cardContainer">
-        {users.map((character, index) => (
-          <TinderCard
-            key={character.name}
-            ref={childRefs[index]}
-            className="swipe"
-            onSwipe={(dir) => swiped(dir, character.name, index)}
-            onCardLeftScreen={() => outOfFrame(character.name, index)}
-          >
-            <div
-              style={{ backgroundImage: "url(" + character.image + ")" }}
-              className="card"
-            />
-            <h3>{character.name}</h3>
-            <div className="buttons">
-              <button
-                style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-                onClick={() => swipe("left")}
-              >
-                Swipe left!
-              </button>
-              {/* <button style={{ backgroundColor: !canGoBack && "#c3c4d3" }}>
+    <Layout title="Find">
+      <Link onClick={async () => dispatch(clearSession())}> Logout </Link>
+      <div style={{ marginLeft: "-8px", marginRight: "-8px" }}>
+        <div className="cardContainer">
+          {users.map((character, index) => (
+            <TinderCard
+              key={character.name}
+              ref={childRefs[index]}
+              className="swipe"
+              onSwipe={(dir) => swiped(dir, character.name, index)}
+              onCardLeftScreen={() => outOfFrame(character.name, index)}
+            >
+              <div
+                style={{ backgroundImage: "url(" + character.image + ")" }}
+                className="card"
+              />
+              <h3>{character.name}</h3>
+              <div className="buttons">
+                <button
+                  style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+                  onClick={() => swipe("left")}
+                >
+                  Swipe left!
+                </button>
+                {/* <button style={{ backgroundColor: !canGoBack && "#c3c4d3" }}>
                 Undo swipe!
               </button> */}
-              <button
-                style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
-                onClick={() => swipe("right")}
-              >
-                Swipe right!
-              </button>
-            </div>
-            {lastDirection ? (
-              <h2 key={lastDirection} className="infoText">
-                You swiped {lastDirection}
-              </h2>
-            ) : (
-              <div className="infoText">
-                <p>Looking for mentees</p>
-                <p>Looking to get better at html, css</p>
-                <p>Skills: HTML, CSS, Adobe Photoshop</p>
+                <button
+                  style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
+                  onClick={() => swipe("right")}
+                >
+                  Swipe right!
+                </button>
               </div>
-            )}
-          </TinderCard>
-        ))}
+              {lastDirection ? (
+                <h2 key={lastDirection} className="infoText">
+                  You swiped {lastDirection}
+                </h2>
+              ) : (
+                <div className="infoText">
+                  <p>Looking for mentees</p>
+                  <p>Looking to get better at html, css</p>
+                  <p>Skills: HTML, CSS, Adobe Photoshop</p>
+                </div>
+              )}
+            </TinderCard>
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
