@@ -1,0 +1,33 @@
+.discover-page {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  border: 20vw;
+  padding: 2vw;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.industries-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 2vw 30vw;
+}
+
+.discover-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 85vw;
+}
+#logo {
+  width: 5vw;
+}
+
+#bell {
+  align-self: flex-end;
+  width: 5vw;
+}

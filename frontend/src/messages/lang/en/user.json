@@ -1,8 +1,0 @@
-{
-  "serverError": "An unexpected error occurred. Please try again later.",
-  "emptyFieldError": "Please fill out all mandatory fields.",
-  "emptyEmailError": "Please enter your email address.",
-  "nameLengthError": "Please enter a name at least 3 characters.",
-  "invalidEmailError": "Please enter a valid email address.",
-  "invalidPasswordError": "Password must be at least 3 characters long and contain at least one lowercase letter, one uppercase letter and one number."
-}

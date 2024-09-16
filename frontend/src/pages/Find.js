@@ -1,33 +1,60 @@
 import "../css/find.scss";
+import Layout from "../components/Layout";
 
 import TinderCard from "react-tinder-card";
-import Erlich from "../assets/erlich.jpg";
-import Richard from "../assets/richard.jpg";
-import { createRef, useMemo, useRef, useState } from "react";
+import { createRef, useEffect, useMemo, useRef, useState } from "react";
+
+import { config } from "../config";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { clearSession } from "../redux/actions/UserAction";
+import Footer from "../components/Footer";
+
+const endpoint = config.url;
 
 const Find = () => {
-  const db = [
-    {
-      name: "Richard Hendricks",
-      url: Richard,
-    },
-    {
-      name: "Erlich Bachman",
-      url: Erlich,
-    },
-  ];
+  const dispatch = useDispatch();
+  const [users, setUsers] = useState([]);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const navigate = useNavigate();
 
-  const [currentIndex, setCurrentIndex] = useState(db.length - 1);
+  const getUsers = async () => {
+    try {
+      const response = await fetch(endpoint + "/api/v1/users/fetch-users", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setUsers(data.users);
+      } else {
+        const data = await response.json();
+        console.error("Fetching users failed:", data);
+      }
+    } catch (error) {
+      console.error("Error during fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate("/login");
+
+    getUsers();
+  }, [isLoggedIn, navigate]);
+
+  const [currentIndex, setCurrentIndex] = useState(users.length - 1);
   const [lastDirection, setLastDirection] = useState();
 
   const currentIndexRef = useRef(currentIndex);
 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(users.length)
         .fill(0)
         .map((i) => createRef()),
-    [db.length]
+    [users.length]
   );
 
   const updateCurrentIndex = (val) => {
@@ -42,10 +69,10 @@ const Find = () => {
 
   const canSwipe = currentIndex >= 0;
 
-  const canGoBack = currentIndex < db.length - 1;
+  const canGoBack = currentIndex < users.length - 1;
 
   const swipe = async (dir) => {
-    if (canSwipe && currentIndex < db.length) {
+    if (canSwipe && currentIndex < users.length) {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
     }
   };
@@ -60,51 +87,56 @@ const Find = () => {
   };
 
   return (
-    <div>
-      <h1>Discover</h1>
-      <div className="cardContainer">
-        {db.map((character, index) => (
-          <TinderCard
-            key={character.name}
-            ref={childRefs[index]}
-            className="swipe"
-            onSwipe={(dir) => swiped(dir, character.name, index)}
-            onCardLeftScreen={() => outOfFrame(character.name, index)}
-          >
-            <div
-              style={{ backgroundImage: "url(" + character.url + ")" }}
-              className="card"
+    <Layout title="Find">
+      {/* <Link onClick={async () => dispatch(clearSession())}> Logout </Link> */}
+      <div style={{ marginLeft: "-8px", marginRight: "-8px" }}>
+        <div className="cardContainer">
+          {users.map((character, index) => (
+            <TinderCard
+              key={character.name}
+              ref={childRefs[index]}
+              className="swipe"
+              onSwipe={(dir) => swiped(dir, character.name, index)}
+              onCardLeftScreen={() => outOfFrame(character.name, index)}
             >
-              <h3>{character.name}</h3>
-            </div>
-            <div className="buttons">
-              <button
-                style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-                onClick={() => swipe("left")}
-              >
-                Swipe left!
-              </button>
-              <button style={{ backgroundColor: !canGoBack && "#c3c4d3" }}>
+              <div
+                style={{ backgroundImage: "url(" + character.image + ")" }}
+                className="card"
+              />
+              <div className="buttons">
+                <button
+                  style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+                  onClick={() => swipe("left")}
+                >
+                  Swipe left!
+                </button>
+                {/* <button style={{ backgroundColor: !canGoBack && "#c3c4d3" }}>
                 Undo swipe!
-              </button>
-              <button
-                style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
-                onClick={() => swipe("right")}
-              >
-                Swipe right!
-              </button>
-            </div>
-            {lastDirection ? (
-              <h2 key={lastDirection} className="infoText">
-                You swiped {lastDirection}
-              </h2>
-            ) : (
-              <h2 className="infoText">Swipe a card or press a button!</h2>
-            )}
-          </TinderCard>
-        ))}
+              </button> */}
+                <button
+                  style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
+                  onClick={() => swipe("right")}
+                >
+                  Swipe right!
+                </button>
+              </div>
+              {lastDirection ? (
+                <h2 key={lastDirection} className="infoText">
+                  You swiped {lastDirection}
+                </h2>
+              ) : (
+                <div className="infoText">
+                  <h3>{character.name}</h3>
+                  <p>Project Manager</p>
+                  <p>Looking to get better at html, css</p>
+                </div>
+              )}
+            </TinderCard>
+          ))}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </Layout>
   );
 };
 

@@ -1,0 +1,26 @@
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+}
+
+.logo-container {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  max-width: 80%;
+  height: auto;
+}
+
+.button-container {
+  background-color: var(--primaryColor);
+  border-radius: 2rem 2rem 0 0;
+  width: 100%;
+  padding: 20px 0;
+}
