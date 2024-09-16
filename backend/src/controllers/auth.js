@@ -38,7 +38,7 @@ export const loginUser = async (req, res) => {
   }
 
   // Create and assign a JWT
-  const environment = (process.env.NODE_ENV).trim().toString();
+  const environment = process.env.NODE_ENV?.trim().toString();
   const token = jwt.sign({ id: req.userId }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_LIFETIME,
   });
@@ -59,5 +59,6 @@ export const loginUser = async (req, res) => {
     status: 200,
     message: messages.userLoginSuccess,
     id: user._id,
+    name: user.name,
   });
 };

@@ -3,20 +3,18 @@
 }
 
 .cardContainer {
-  width: 90vw;
-  max-width: 260px;
-  height: 300px;
+  width: 100vw;
+  height: 100vh;
   margin: auto;
 }
 
 .card {
   position: relative;
   background-color: #fff;
-  width: 80vw;
-  max-width: 260px;
-  height: 300px;
+  width: 100vw;
+  height: 60vh;
   box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.3);
-  border-radius: 20px;
+  // border-radius: 20px;
   background-size: cover;
   background-position: center;
 }
@@ -35,15 +33,31 @@
 
 .infoText {
   width: 100%;
-  justify-content: center;
-  display: flex;
-  color: #000;
   animation-name: popup;
   animation-duration: 800ms;
+  position: absolute;
+  top: 60%;
 }
 
 .buttons {
-  margin: 20px;
+  margin: 20px auto;
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 }
+
+.infoText h3 {
+  color: #fff;
+  font-size: 2em;
+}
+
+// .swipe * {
+//   position: relative;
+//   top: 0;
+// }
+
+// .swipe h3,
+// .infoText {
+//   position: absolute;
+//   top: 80%;
+// }

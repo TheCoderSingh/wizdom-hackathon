@@ -40,9 +40,9 @@ export default function Login() {
       });
 
       if (response.ok) {
-        dispatch(
-          setUser(true)
-        );
+        const data = await response.json();
+
+        dispatch(setUser(true, data.name));
         setLoading(false);
         navigate("/find");
       } else {
