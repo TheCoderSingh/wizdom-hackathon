@@ -1,9 +1,9 @@
 import { SET_USER, CLEAR_SESSION } from "../Types";
 
-export const setUser = (isLoggedIn) => (dispatch) => {
+export const setUser = (isLoggedIn, name) => (dispatch) => {
   dispatch({
     type: SET_USER,
-    payload: { isLoggedIn },
+    payload: { isLoggedIn, name },
   });
 };
 

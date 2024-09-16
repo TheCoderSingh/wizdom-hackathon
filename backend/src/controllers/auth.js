@@ -59,5 +59,6 @@ export const loginUser = async (req, res) => {
     status: 200,
     message: messages.userLoginSuccess,
     id: user._id,
+    name: user.name,
   });
 };

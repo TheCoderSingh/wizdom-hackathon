@@ -1,0 +1,153 @@
+// profile.scss
+.profile-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.profile-header {
+  margin-bottom: 20px;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.profile-name {
+  font-size: 2em;
+  color: #007bff;
+}
+
+.profile-profession {
+  font-size: 1.2em;
+  color: #555;
+}
+
+.profile-details {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.profile-edit-form {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.profile-edit-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.profile-edit-form input,
+.profile-edit-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 25px; /* گرد کردن گوشه‌ها */
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* سایه اولیه */
+}
+
+button:hover {
+  background-color: #0056b3; /* تغییر رنگ در حالت هاور */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* سایه بزرگ‌تر در حالت هاور */
+}
+
+button:active {
+  background-color: #003f7f; /* رنگ در حالت کلیک */
+  box-shadow: none; /* حذف سایه در حالت کلیک */
+}
+
+button:focus {
+  outline: none; /* حذف خط فوکوس */
+}
+
+
+.profile-edit-form button {
+  padding: 10px 20px;
+  background-color: #007bff; 
+  color: white;
+  border: none;
+  border-radius: 25px; 
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  text-transform: uppercase; 
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.profile-edit-form button:hover {
+  background-color: #0056b3; 
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
+}
+
+.profile-edit-form button:active {
+  background-color: #003f7f; 
+  box-shadow: none; 
+}
+
+.profile-edit-form button:focus {
+  outline: none; 
+}
+
+.profile-edit-form {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.profile-edit-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.profile-edit-form input,
+.profile-edit-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.profile-edit-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-edit-form button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
